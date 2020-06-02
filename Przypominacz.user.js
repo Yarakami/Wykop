@@ -223,7 +223,7 @@
                 btnList.forEach(element => {
                     console.log(element);
                     element.addEventListener("click", function(){
-                        test(element.id);
+                        RemovePost(element.id);
                     }, false);
                 })
             }
@@ -235,7 +235,7 @@
         CheckButton(GetCurrentPostId(), false);
     }
 
-    function test(id)
+    function RemovePost(id)
     {
         myStorage.removeItem(id);
         CreatePostsList();
