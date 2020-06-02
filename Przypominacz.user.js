@@ -221,7 +221,6 @@
             if(btnList.length >0)
             {
                 btnList.forEach(element => {
-                    console.log(element);
                     element.addEventListener("click", function(){
                         RemovePost(element.id);
                     }, false);
@@ -255,14 +254,12 @@
             {
                 let date = moment();
 
-                console.log(moment(date).toISOString());
                 let inter = myStorage.getItem("interval");
                 let timeToAdd = null;
                 if(inter) timeToAdd = inter;
                 else inter = 15;
 
                 let added = moment(date).add(inter, 'minutes').toISOString();
-                console.log(added);
                 myStorage.setItem(postId , added);
                 isInHistory = true;
             }
@@ -365,8 +362,7 @@
                 {
                     myStorage.setItem("interval" , l);
                 }
-            }
-            //
+            }            
         }
     }
 
