@@ -206,9 +206,9 @@
             let infoUl = document.createElement("ul");
             posts.forEach(element => {
                 let infoLi = document.createElement("ul");
-                let infoA = document.createElement("a");
+                let infoA = document.createElement("p");
                 let deleteButton = '<a class="remove-item" id="'+element.id+'" ><i class="fa fa-times" style="margin-left:24px"></i><a>';
-                infoA.innerHTML = element.id+" || " + moment(element.date).format('DD/MM/YYYY, H:mm:ss') + "" + deleteButton;
+                infoA.innerHTML = '<a href ="https://www.wykop.pl/wpis/'+element.id+'/"><i style="padding-top:10px" class="fa fa-external-link"></i>Link</a> || ' + moment(element.date).format('DD/MM/YYYY, H:mm:ss') + "" + deleteButton;
                 infoLi.appendChild(infoA);
 
                 infoUl.appendChild(infoLi);
