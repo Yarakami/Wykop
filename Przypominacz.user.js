@@ -308,7 +308,7 @@
     {
         let savedPosts = [];
         for (let key in myStorage){
-            if(!isNaN(key))
+            if(!isNaN(key) && key)
             {
                 let sp =
                 {
