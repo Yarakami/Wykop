@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Przypominacz
 // @namespace    przypominacz
-// @version      0.2
+// @version      0.3
 // @description  Przypomina tobie o wpisie na mikro
 // @author       Yarakami
 // @match        https://www.wykop.pl/*
@@ -203,17 +203,43 @@
         {
             let info1 = document.createElement("div");
             info1.classList.add("nPostsData");
-            let infoParagraph1 = document.createElement("p");
-            infoParagraph1.innerHTML = "Liczba zapisanych wpisów: "+posts.length+"  ᕦ(òóˇ)ᕤ";
-            info1.appendChild(infoParagraph1);
+            let infoUl = document.createElement("ul");
+            posts.forEach(element => {
+                let infoLi = document.createElement("ul");
+                let infoA = document.createElement("a");
+                let deleteButton = '<a class="remove-item" id="'+element.id+'" ><i class="fa fa-times" style="margin-left:24px"></i><a>';
+                infoA.innerHTML = element.id+" || " + moment(element.date).format('DD/MM/YYYY, H:mm:ss') + "" + deleteButton;
+                infoLi.appendChild(infoA);
+
+                infoUl.appendChild(infoLi);
+            })
+            info1.appendChild(infoUl);
             postsParent.appendChild(info1);
+            let btnList = document.getElementsByClassName("remove-item");
+            btnList = [].slice.call(btnList);
+
+            if(btnList.length >0)
+            {
+                btnList.forEach(element => {
+                    console.log(element);
+                    element.addEventListener("click", function(){
+                        test(element.id);
+                    }, false);
+                })
+            }
         }
     }
-
     //Add notification button function
     if(currentUrl.includes("/wpis/"))
     {
         CheckButton(GetCurrentPostId(), false);
+    }
+
+    function test(id)
+    {
+        myStorage.removeItem(id);
+        CreatePostsList();
+        CreateCounter();
     }
 
 
@@ -333,7 +359,7 @@
             else
             {
                 let l = Math.round(intervalInput.value);
-                if(l <=5)alert("Liczba jest za mała");
+                if(l <5)alert("Liczba jest za mała");
                 else if(l >60)alert("Liczba jest za duża");
                 else
                 {
